@@ -14,4 +14,16 @@ class Progetti extends Model
     return $this->belongsTo(Progetti::class, 'progetto_id');
 }
 
+protected $fillable = [
+    'nome',
+    'descrizione',
+    'data_inizio',
+    'data_fine',
+];
+
+protected $casts = [
+    'data_inizio' => 'date',
+    'data_fine' => 'date',
+];
+
 }

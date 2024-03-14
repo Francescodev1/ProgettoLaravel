@@ -34,7 +34,7 @@ class AttivitaController extends Controller
 
     public function show($id)
     {
-        $attivita = Attivita::findOrFail($id);
+        $attivita = Attivita::with('progetto')->findOrFail($id);
         return view('attivitas.show', compact('attivita'));
     }
 

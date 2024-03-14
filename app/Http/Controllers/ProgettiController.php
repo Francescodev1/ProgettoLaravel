@@ -23,7 +23,8 @@ public function store(Request $request)
     $validatedData = $request->validate([
         'nome' => 'required|max:255',
         'descrizione' => 'required',
-        // Aggiungi altre validazioni necessarie
+        'data_inizio' => 'required|date', // Assicurati di includere la validazione per data_inizio
+        'data_fine' => 'nullable|date',   // Includi data_fine se vuoi, con validazione appropriata
     ]);
     
     Progetti::create($validatedData);
@@ -47,11 +48,16 @@ public function update(Request $request, $id)
     $validatedData = $request->validate([
         'nome' => 'required|max:255',
         'descrizione' => 'required',
-        // Aggiungi altre validazioni necessarie
+        'data_inizio' => 'required|date', // Validazione per data_inizio
+        'data_fine' => 'nullable|date',   // Validazione per data_fine
     ]);
 
-    Progetti::whereId($id)->update($validatedData);
+
+    $progetto = Progetti::findOrFail($id);
+    $progetto->update($validatedData);
     return redirect()->route('progetti.index');
+    // Progetti::whereId($id)->update($validatedData);
+    // return redirect()->route('progetti.index');
 }
 
 public function destroy($id)
