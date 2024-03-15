@@ -11,7 +11,7 @@ class Progetti extends Model
 
     public function progetto()
 {
-    return $this->belongsTo(Progetti::class, 'progetto_id');
+    return $this->hasMany(Attivita::class, 'progetto_id');
 }
 
 protected $fillable = [
